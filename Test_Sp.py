@@ -6,9 +6,9 @@ plt.rcParams["font.family"] = "Century Gothic"
 plt.rcParams["font.size"] = "14"
 
 SP_Ideal = Network('SP/SP_Bad_Load.s2p')
-SP_FF    = Network('SP/SwitchRF12_FF_calcR.s2p')
-SP_SS    = Network('SP/SwitchRF12_SS_calcR.s2p')
-SP_TT    = Network('SP/SwitchRF12_TT_calcR.s2p')
+SP_FF    = Network('SP/Load_RF12_FF.s2p')
+SP_SS    = Network('SP/Load_RF12_SS.s2p')
+SP_TT    = Network('SP/Load_RF12_TT.s2p')
 
 plt.figure()
 
