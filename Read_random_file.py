@@ -5,7 +5,7 @@ plt.rcParams["font.size"] = "14"
 
 comment = ["#", ";"]
 dot = ","
-File = "Files/S21_Attenuator_10db.vcsv"
+File = "Files/Phase_attenuator.vcsv"
 
 num_colums = 0
 num_strings =  0
@@ -37,11 +37,11 @@ print(num_colums)
 plt.figure()
 #plt.title("with Port 2")
 plt.plot(Value_1[:, 0], Value_1[:, 1], label='FF', linewidth ='3')
-plt.plot(Value_1[:, 0], Value_1[:, 3], label='SS', linewidth ='3')
-plt.plot(Value_1[:, 0], Value_1[:, 5], label='TT', linewidth ='3')
+#plt.plot(Value_1[:, 0], Value_1[:, 3], label='SS', linewidth ='3')
+#plt.plot(Value_1[:, 0], Value_1[:, 5], label='TT', linewidth ='3')
 plt.xlabel('F, Гц')
-plt.ylabel('S21, дБ')
-plt.legend()
+plt.ylabel('Phase, deg')
+#plt.legend()
 plt.grid()
 plt.show()
 
