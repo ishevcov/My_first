@@ -26,10 +26,10 @@ def S_D(P1, P3, P2, P4, Type, Folder_1, Title_1, Legend_1):
 
 
 Title   = "Core 400 мкм"
-Folder_1   = "SP/VIA/GL102_400um_diff.s4p"
+Folder_1   = "SP/VIA/GL102_400um_diff_35.s4p"
 Legend_1   = "GL102"
 
-Folder_2   = "SP/VIA/GX13_400um_diff.s4p"
+Folder_2   = "SP/VIA/GX13_400um_diff_35.s4p"
 Legend_2   = "GX13"
 
 
@@ -47,4 +47,4 @@ plt.legend()
 plt.grid()
 plt.show()
 
-##
+#
