@@ -18,19 +18,26 @@ def S_D(P1, P3, P2, P4, Type, Folder_1, Title_1, Legend_1):
         SDD = 0.5*(SP.s[:, P1, P1]-SP.s[:, P1, P3]-SP.s[:, P3, P1]+SP.s[:, P3, P3])
     elif int(Type) == 21:
         SDD = 0.5*(SP.s[:, P2, P1]-SP.s[:, P4, P1]-SP.s[:, P2, P3]+SP.s[:, P4, P3])
-
     plt.title(Title_1)
     plt.plot(F, 20*np.log10(SDD), label=Legend_1, linewidth ='3')
     plt.xlabel('F, Гц')
     plt.ylabel(f'S{Type}, дБ')
 
 
-Title   = "Core 400 мкм"
-Folder_1   = "SP/VIA/GL102_400um_diff_35.s4p"
+
+
+
+
+
+Title   = "Core 800 мкм"
+Folder_1   = f"SP/VIA/GL102_800um_substrate.s4p"
 Legend_1   = "GL102"
 
-Folder_2   = "SP/VIA/GX13_400um_diff_35.s4p"
+Folder_2   = "SP/VIA/GX13_800um_substrate.s4p"
 Legend_2   = "GX13"
+
+Folder_3   = "SP/Chip_VIA/Chip_VIA_1.s4p"
+Legend_3   = "Chip_VIA"
 
 
 plt.figure()
@@ -45,6 +52,18 @@ S_D(1, 2, 3, 4, 11, Folder_1, Title, Legend_1)
 S_D(1, 2, 3, 4, 11, Folder_2, Title, Legend_2)
 plt.legend()
 plt.grid()
+
+
+plt.figure()
+S_D(1, 2, 3, 4, 11, Folder_3, "VIA Chip", Legend_3)
+plt.legend()
+plt.grid()
+plt.figure()
+S_D(1, 2, 3, 4, 21, Folder_3, "VIA Chip", Legend_3)
+plt.legend()
+plt.grid()
+
+
 plt.show()
 
 #

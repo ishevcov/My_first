@@ -7,6 +7,8 @@ import math, cmath
 
 plt.rcParams["font.family"] = "Century Gothic"
 plt.rcParams["font.size"] = "14"
+
+
 #------------------------------------------------------------------
 S_75       = Network("C:/Users/SH/Desktop/Test_1/75Ohm/75_Ohm_line.s2p")
 S_75_calc  = Network("C:/Users/SH/Desktop/Test_1/75Ohm_calc.s2p")
@@ -15,6 +17,7 @@ Attenuator_6db_calc =Network("C:/Users/SH/Desktop/Test_1/Attenuator_6db_calc.s2p
 Attenuator_9db =Network("C:/Users/SH/Desktop/Test_1/Attenuator_9db/Attenuator_9db.s2p")
 Attenuator_9db_calc =Network("C:/Users/SH/Desktop/Test_1/Attenuator_9db_calc.s2p")
 #------------------------------------------------------------------
+
 S11_75_db = 20*np.log10(S_75.s[:, 1-1, 1-1])
 S11_75_calc_db = 20*np.log10(S_75_calc.s[:, 1-1, 1-1])
 S21_75_db = 20*np.log10(S_75.s[:, 2-1, 1-1])
