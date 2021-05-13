@@ -13,6 +13,7 @@ plt.rcParams["font.size"] = "14"
 #example
 #https://github.com/scikit-rf/scikit-rf/issues/235
 
+
 #----------------------------------------------------------
 #Input Data
 #----------------------------------------------------------
@@ -21,6 +22,10 @@ S_75 = Network("C:/Users/SH/PycharmProjects/Course_Python_Django/SP/Two_ports/Re
 Cascade = Network("C:/Users/SH/PycharmProjects/Course_Python_Django/SP/Two_ports/Cascade_D_A_D.s2p")
 Attenuator = Network("C:/Users/SH/PycharmProjects/Course_Python_Django/SP/Two_ports/Attenuator_9db.s2p")
 F = S_75.f[:]
+
+
+
+
 
 #----------------------------------------------------------
 #Conversion and calculations
@@ -43,6 +48,9 @@ for i in range(len(Cascade_t)):
 
 
 Matrix_s = rf.t2s(Matrix)
+
+
+
 
 #----------------------------------------------------------
 #Plot
