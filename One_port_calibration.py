@@ -8,7 +8,7 @@ plt.rcParams["font.size"] = "14"
 
 
 # a list of Network types, holding 'ideal' responses
-my_ideals = [\
+my_ideals = [
         rf.Network('SP/One_port/ideal/short.s1p'),
         rf.Network('SP/One_port/ideal/open.s1p'),
         rf.Network('SP/One_port/ideal/load.s1p'),
@@ -16,14 +16,14 @@ my_ideals = [\
 
 # a list of Network types, holding 'measured' responses
 
-my_measured = [\
+my_measured = [
         rf.Network('SP/One_port/measure/short.s1p'),
         rf.Network('SP/One_port/measure/open.s1p'),
         rf.Network('SP/One_port/measure/load.s1p'),
         ]
 
 ## create a Calibration instance
-cal = rf.OnePort(\
+cal = rf.OnePort(
         ideals = my_ideals,
         measured = my_measured,
         )
