@@ -23,7 +23,7 @@ my_measured = [
         ]
 
 ## create a Calibration instance
-cal = rf.OnePort(
+cal = OnePort(
         ideals = my_ideals,
         measured = my_measured,
         )
