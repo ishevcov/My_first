@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 plt.rcParams["font.family"] = "Century Gothic"
 plt.rcParams["font.size"] = "14"
 
+
+
 # a list of Network types, holding 'ideal' responses
 thru_ideal = rf.Network('SP/SOLT/ideal/thru.s2p')
 short_ideal = rf.Network('SP/SOLT/ideal/short.s1p')
@@ -21,7 +23,7 @@ my_ideals = [
 
 # a list of Network types, holding 'measured' responses
 thru_measure = rf.Network('SP/SOLT/measure/thru.s2p')
-short_measure = rf.Network('SP/SOLT/measure/short.s1p')
+short_measure = rf.Network(f'SP/SOLT/measure/short.s1p')
 open_measure =  rf.Network('SP/SOLT/measure/open.s1p')
 load_measure =  rf.Network('SP/SOLT/measure/load.s1p')
 
@@ -45,10 +47,10 @@ cal.run()
 dut = rf.Network('SP/SOLT/measure/DUT.s2p')
 dut_caled = cal.apply_cal(dut)
 
+
 #Ideal DUT characteristic for compare
 DUT_IDEAL = rf.Network('SP/SOLT/ideal/DUT.s2p')
 
-# plot results
 plt.figure()
 dut_caled.plot_s_db(m=1 - 1, n=1 - 1, label ='Calculated DUT', linewidth='3')
 DUT_IDEAL.plot_s_db(m=1 - 1, n=1 - 1, label ='Ideal DUT', linewidth='3', linestyle='--')
@@ -56,9 +58,10 @@ plt.xlabel('F, Гц')
 plt.ylabel('S11, дБ')
 plt.grid()
 
+
 plt.figure()
-dut_caled.plot_s_db(m=2 - 1, n=1 - 1, label ='Calculated DUT', linewidth='3')
-DUT_IDEAL.plot_s_db(m=2 - 1, n=1 - 1, label ='Ideal DUT', linewidth='3', linestyle='--')
+dut_caled.plot_s_db(m=2 - 1, n=1 - 1, label='Calculated DUT', linewidth='3')
+DUT_IDEAL.plot_s_db(m=2 - 1, n=1 - 1, label='Ideal DUT', linewidth='3', linestyle='--')
 plt.xlabel('F, Гц')
 plt.ylabel('S21, дБ')
 plt.grid()
