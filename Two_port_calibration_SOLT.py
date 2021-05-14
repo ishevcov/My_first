@@ -25,7 +25,7 @@ my_ideals = [
 thru_measure = rf.Network('SP/SOLT/measure/thru.s2p')
 short_measure = rf.Network(f'SP/SOLT/measure/short.s1p')
 open_measure =  rf.Network('SP/SOLT/measure/open.s1p')
-load_measure =  rf.Network('SP/SOLT/measure/load.s1p')
+load_measure =  rf.Network('SP/SOLT/measure/load_L.s1p')
 
 my_measured = [
     rf.two_port_reflect(open_measure, open_measure),
@@ -44,12 +44,12 @@ cal = SOLT(
 cal.run()
 
 # apply it to a dut
-dut = rf.Network('SP/SOLT/measure/DUT.s2p')
+dut = rf.Network('SP/SOLT/measure/DUT_1.s2p')
 dut_caled = cal.apply_cal(dut)
 
 
 #Ideal DUT characteristic for compare
-DUT_IDEAL = rf.Network('SP/SOLT/ideal/DUT.s2p')
+DUT_IDEAL = rf.Network('SP/SOLT/ideal/DUT_1.s2p')
 
 plt.figure()
 dut_caled.plot_s_db(m=1 - 1, n=1 - 1, label ='Calculated DUT', linewidth='3')
