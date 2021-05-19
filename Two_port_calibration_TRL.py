@@ -1,33 +1,55 @@
 import skrf as rf
-from skrf.calibration import UnknownThru
+
 from skrf.calibration import TRL
+from skrf.calibration import NISTMultilineTRL
 import matplotlib.pyplot as plt
 import numpy as np
 
 plt.rcParams["font.family"] = "Century Gothic"
 plt.rcParams["font.size"] = "14"
 
-reflect = rf.Network('SP/TRL/Reflect.s1p')
+Home_0 = 'SP/SOLT'
+Home_1 = 'SP/SOLT/measurelay_1'
+Home_2 = 'SP/TRL'
 
-T = rf.Network('SP/TRL/Thru.s2p')
+D_reflect = f'{Home_1}/open.s1p'
+D_thru    = f'{Home_1}/thru.s2p'
+D_Line_1 =  f'{Home_2}/Line_1.s2p'
+D_Line_2 =  f'{Home_2}/Line_2.s2p'
+D_DUT_Ideal = f'{Home_0}/ideal/DUT1.s2p'
+D_DUT_Measure = f'{Home_1}/DUT1.s2p'
+
+reflect = rf.Network(D_reflect)
+
+
+
+T = rf.Network(D_thru)
 R = rf.two_port_reflect(reflect, reflect)
-L1 = rf.Network('SP/TRL/Line_1.s2p')
-L2 = rf.Network('SP/TRL/Line_2.s2p')
+L1 = rf.Network(D_Line_1)
+L2 = rf.Network(D_Line_2)
 
-measured = [T, R, L2]
+measured = [T, R, L1]
 
 cal = TRL(
     measured = measured,
     Grefls=[1],
-    l = [0, 7.5e-3],
+    l = [0, 2.25e-3],
     gamma_root_choice = 'auto',
 )
 
 #Ideal DUT characteristic for compare
-DUT_IDEAL = rf.Network('SP/TRL/DUT_ideal.s2p')
+DUT_IDEAL = rf.Network(D_DUT_Ideal)
 
-dut_raw = rf.Network('SP/TRL/DUT.s2p')
+dut_raw = rf.Network(D_DUT_Measure)
 dut_corrected = cal.apply_cal(dut_raw)
+
+
+
+plt.figure()
+dut_corrected.plot_s_smith(m=1 - 1, n=1 - 1, label ='Calculated DUT', linewidth='3')
+DUT_IDEAL.plot_s_smith(m=1 - 1, n=1 - 1, label ='Ideal DUT', linewidth='3', linestyle='--')
+plt.ylabel('S11')
+plt.grid()
 
 
 plt.figure()
@@ -36,7 +58,6 @@ DUT_IDEAL.plot_s_db(m=1 - 1, n=1 - 1, label ='Ideal DUT', linewidth='3', linesty
 plt.xlabel('F, Гц')
 plt.ylabel('S11, дБ')
 plt.grid()
-
 
 plt.figure()
 dut_corrected.plot_s_db(m=2 - 1, n=1 - 1, label ='Calculated DUT', linewidth='3')

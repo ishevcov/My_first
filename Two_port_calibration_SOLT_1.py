@@ -21,7 +21,7 @@ my_ideals = [
     thru_ideal,
     ]
 
-DUT_IDEAL = rf.Network('SP/SOLT/ideal/DUT.s2p')
+DUT_IDEAL = rf.Network('SP/SOLT/ideal/DUT_2.s2p')
 DUT_IDEAL.plot_s_db(m=1 - 1, n=1 - 1, label ='Ideal DUT', linewidth='3')
 
 for i in l:
@@ -49,7 +49,7 @@ for i in l:
     cal.run()
 
     # apply it to a dut
-    dut = rf.Network('SP/SOLT/measure/DUT.s2p')
+    dut = rf.Network('SP/SOLT/measure/DUT_2.s2p')
     dut_caled = cal.apply_cal(dut)
 
     dut_caled.plot_s_db(m=1 - 1, n=1 - 1, label =f'L ={i} pH', linewidth='3')

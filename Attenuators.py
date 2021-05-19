@@ -4,7 +4,7 @@ import math, cmath
 #Input data
 #--------------------------------------------
 
-Z = 100
+Z = 60
 K_db = 10
 K_val = math.pow(10, K_db/20)
 
