@@ -1,6 +1,6 @@
 import skrf as rf
-from skrf.calibration import UnknownThru
-from skrf.calibration import SOLT
+
+from skrf.calibration import LMR16
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -26,52 +26,49 @@ def PLOT_smith(Data, label='Test', N_fig = 1, sp = 11):
 Home_ideal = 'SP/SOLT/ideal'
 Home_measure = 'SP/SOLT/measureLay_con'
 N_DUT = 'DUT2'
-N_Load = 'load.s1p'
 
-
-D_short_i   = f'{Home_ideal}/short.s1p'
-D_open_i    = f'{Home_ideal}/open.s1p'
-D_load_i    = f'{Home_ideal}/{N_Load}'
+D_reflect_i   = f'{Home_ideal}/short.s1p'
 D_thru_i    = f'{Home_ideal}/thru.s2p'
 D_DUT_Ideal = f'{Home_ideal}/{N_DUT}.s2p'
 
-D_short_m   = f'{Home_measure}/short.s1p'
-D_open_m    = f'{Home_measure}/open.s1p'
+D_reflect_m   = f'{Home_measure}/short.s1p'
 D_load_m    = f'{Home_measure}/load.s1p'
 D_thru_m    = f'{Home_measure}/thru.s2p'
 D_DUT_Measure = f'{Home_measure}/{N_DUT}.s2p'
 
-
 # a list of Network types, holding 'ideal' responses
-short_ideal = rf.Network(D_short_i)
-open_ideal =  rf.Network(D_open_i)
-load_ideal =  rf.Network(D_load_i)
+reflect_ideal = rf.Network(D_reflect_i)
 thru_ideal = rf.Network(D_thru_i)
 
+
+# a list of Network types, holding 'ideal' responses
 my_ideals = [
-    rf.two_port_reflect(open_ideal, open_ideal),
-    rf.two_port_reflect(short_ideal, load_ideal),
-    rf.two_port_reflect(load_ideal, short_ideal),
-    thru_ideal,
+    thru_ideal
+    #rf.two_port_reflect(thru_ideal, thru_ideal),
+    #rf.two_port_reflect(load_ideal, load_ideal),
+    #rf.two_port_reflect(reflect_ideal, reflect_ideal),
+    #rf.two_port_reflect(reflect_ideal, load_ideal),
+    #rf.two_port_reflect(load_ideal, reflect_ideal),
     ]
 
 # a list of Network types, holding 'measured' responses
-short_measure = rf.Network(D_short_m)
-open_measure =  rf.Network(D_open_m)
+reflect_measure = rf.Network(D_reflect_m)
 load_measure =  rf.Network(D_load_m)
 thru_measure = rf.Network(D_thru_m)
 
 my_measured = [
-    rf.two_port_reflect(open_measure, open_measure),
-    rf.two_port_reflect(short_measure, load_measure),
-    rf.two_port_reflect(load_measure, short_measure),
     thru_measure,
+    rf.two_port_reflect(load_measure, load_measure),
+    rf.two_port_reflect(reflect_measure, reflect_measure),
+    rf.two_port_reflect(reflect_measure, load_measure),
+    rf.two_port_reflect(load_measure, reflect_measure),
     ]
 
 ## create a SOLT instance
-cal = SOLT(
+cal = LMR16(
     ideals = my_ideals,
     measured = my_measured,
+    ideal_is_reflect=False,
     )
 
 # run calibration algorithm
